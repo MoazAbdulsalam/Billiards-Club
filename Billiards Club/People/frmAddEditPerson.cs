@@ -122,7 +122,7 @@ namespace Billiards_Club.People
                 if (pbPersonImage.ImageLocation != null)
                 {
                     string Source = pbPersonImage.ImageLocation.ToString();
-                    if (clsUtil.CopyImageToProjectImagesFolder(ref Source))
+                    if (clsSharedUtil.CopyImageToProjectImagesFolder(ref Source))
                     {
                         pbPersonImage.ImageLocation = Source;
 
