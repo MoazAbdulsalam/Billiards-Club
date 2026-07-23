@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../../c# course 19/DVLD/Shared/Shared.csproj" />
+  <Project Path="Billiards Club/Billiards Club.csproj" />
+  <Project Path="BilliardsBusinessLayer/BilliardsBusinessLayer.csproj" />
+  <Project Path="BilliardsDataAccessLayer/BilliardsDataAccessLayer.csproj" />
+</Solution>
