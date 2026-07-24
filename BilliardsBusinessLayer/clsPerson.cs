@@ -117,24 +117,24 @@ namespace BilliardsBusinessLayer
 
             return false;
         }
-        public static Task<DataTable>GetAllPeople()
+        public static Task<DataTable>GetAllPeopleAsync()
         {
             return clsPeopleData.GetAllPeopleAsync();
 
         }
 
-        public static Task<bool> DeletePerson(int ID)
+        public static Task<bool> DeletePersonAsync(int ID)
         {
-            return clsPeopleData.DeletePerson(ID);
+            return clsPeopleData.DeletePersonAsync(ID);
         }
 
-        public static Task<bool> isPersonExist(int ID)
+        public static Task<bool> IsPersonExistAsync(int ID)
         {
-            return clsPeopleData.IsPersonExist(ID);
+            return clsPeopleData.IsPersonExistAsync(ID);
         }
-        public static Task<bool> isPersonExist(string NationalNo)
+        public static Task<bool> IsPersonExistAsync(string NationalNo)
         {
-            return clsPeopleData.IsPersonExist(NationalNo);
+            return clsPeopleData.IsPersonExistAsync(NationalNo);
         }
 
 

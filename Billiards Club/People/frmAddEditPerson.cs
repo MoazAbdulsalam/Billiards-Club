@@ -38,6 +38,7 @@ namespace Billiards_Club.People
         {
             if (Mode == eMode.AddNew)
             {
+                this.Text = "Add New Person";
                 lblHeader.Text = "Add New Person";
                 _Person = new clsPerson();
                 llRemove.Visible = pbPersonImage.ImageLocation != null;
@@ -52,7 +53,11 @@ namespace Billiards_Club.People
                 rbMale.Checked = true;
             }
             else
-                lblHeader.Text = "    Edit Person";
+            {
+                this.Text = "Edit Person";
+                lblHeader.Text = "Edit Person";
+
+            }
 
             if (rbMale.Checked)
                 pbPersonImage.Image = Resources.Male_512;
@@ -199,6 +204,8 @@ namespace Billiards_Club.People
                 MessageBox.Show("Saved Succefully", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Mode = eMode.Update;
                 lblHeader.Text = "Edit Person";
+                this.Text = "Edit Person";
+
                 lblPersonID.Text = _Person.PersonID.ToString();
                 DataBack?.Invoke(this, _Person.PersonID);
             }

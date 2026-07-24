@@ -207,7 +207,7 @@
             // ccTextBoxPhone
             // 
             ccTextBoxPhone.InputType = CustomControl.ccTextBox.InputTypeEnum.NumberInput;
-            ccTextBoxPhone.IsRequired = false;
+            ccTextBoxPhone.IsRequired = true;
             ccTextBoxPhone.Location = new Point(644, 160);
             ccTextBoxPhone.MaxLength = 11;
             ccTextBoxPhone.Name = "ccTextBoxPhone";
@@ -299,7 +299,7 @@
             // ccTextBoxAddress
             // 
             ccTextBoxAddress.InputType = CustomControl.ccTextBox.InputTypeEnum.TextInput;
-            ccTextBoxAddress.IsRequired = false;
+            ccTextBoxAddress.IsRequired = true;
             ccTextBoxAddress.Location = new Point(229, 264);
             ccTextBoxAddress.Multiline = true;
             ccTextBoxAddress.Name = "ccTextBoxAddress";
@@ -568,7 +568,7 @@
             Margin = new Padding(4);
             Name = "frmAddEditPerson";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "frmAddEditPerson";
+            Text = "Add/Edit Person";
             Load += frmAddEditPerson_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             gbData.ResumeLayout(false);

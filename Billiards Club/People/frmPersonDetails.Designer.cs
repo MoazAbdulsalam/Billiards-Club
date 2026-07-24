@@ -76,6 +76,7 @@
             Controls.Add(ctrlPersonCard1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "frmPersonDetails";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Person Details";
             Load += frmPersonDetails_Load;
             ResumeLayout(false);

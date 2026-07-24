@@ -152,7 +152,7 @@ namespace BilliardsDataAccessLayer
             }
             return PersonID;
         }
-        public static async  Task<bool> UpdatePersonAsync(int PersonID, string NationalNo,
+        public static async Task<bool> UpdatePersonAsync(int PersonID, string NationalNo,
          string FirstName, string SecondName, string ThirdName,
          string LastName, DateTime DateOfBirth, byte Gender,
          string Address, string Phone, string Email, string ImagePath)
@@ -259,7 +259,7 @@ namespace BilliardsDataAccessLayer
             return dt;
 
         }
-        public static async Task<bool> DeletePerson(int PersonID)
+        public static async Task<bool> DeletePersonAsync(int PersonID)
         {
             int rowsAffected = 0;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
@@ -288,7 +288,7 @@ namespace BilliardsDataAccessLayer
             return rowsAffected > 0;
 
         }
-        public static async Task<bool> IsPersonExist(string NationalNo)
+        public static async Task<bool> IsPersonExistAsync(string NationalNo)
         {
             bool found = false;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
@@ -319,7 +319,7 @@ namespace BilliardsDataAccessLayer
             }
             return found;
         }
-        public static async Task<bool> IsPersonExist(int PersonId)
+        public static async Task<bool> IsPersonExistAsync(int PersonId)
         {
             bool found = false;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
