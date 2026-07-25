@@ -3,7 +3,7 @@ using Billiards_Club.Users;
 using BilliardsBusinessLayer;
 using BilliardsDataAccessLayer;
 using Microsoft.Data.SqlClient;
-using Shared;
+using SharedUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

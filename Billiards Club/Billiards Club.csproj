@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\c# course 19\DVLD\Shared\Shared.csproj" />
     <ProjectReference Include="..\BilliardsBusinessLayer\BilliardsBusinessLayer.csproj" />
+    <ProjectReference Include="..\SharedUtils\SharedUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

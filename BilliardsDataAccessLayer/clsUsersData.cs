@@ -1,6 +1,6 @@
 ﻿using BilliardsDataAccessLayer.DTOs;
 using Microsoft.Data.SqlClient;
-using Shared;
+using SharedUtils;
 using System;
 using System.Collections.Generic;
 using System.Data;

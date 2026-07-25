@@ -1,7 +1,7 @@
 ﻿using Billiards_Club.People.CustomControl;
 using Billiards_Club.Properties;
 using BilliardsBusinessLayer;
-using Shared;
+using SharedUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -127,7 +127,7 @@ namespace Billiards_Club.People
                 if (pbPersonImage.ImageLocation != null)
                 {
                     string Source = pbPersonImage.ImageLocation.ToString();
-                    if (clsSharedUtil.CopyImageToProjectImagesFolder(ref Source))
+                    if (clsUtil.CopyImageToProjectImagesFolder(ref Source))
                     {
                         pbPersonImage.ImageLocation = Source;
 

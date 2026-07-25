@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="../../c# course 19/DVLD/Shared/Shared.csproj" Id="d170c6ae-ebf6-4843-aac0-6c6b3d2336ab" />
   <Project Path="Billiards Club/Billiards Club.csproj" />
   <Project Path="BilliardsBusinessLayer/BilliardsBusinessLayer.csproj" />
   <Project Path="BilliardsDataAccessLayer/BilliardsDataAccessLayer.csproj" />
+  <Project Path="SharedUtils/SharedUtils.csproj" Id="958b2f32-1ba4-4911-8e76-ebb20172012f" />
 </Solution>

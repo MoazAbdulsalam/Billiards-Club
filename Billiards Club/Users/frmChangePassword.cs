@@ -1,5 +1,5 @@
 ﻿using BilliardsBusinessLayer;
-using Shared;
+using SharedUtils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Shared;
+using SharedUtils;
 using BilliardsDataAccessLayer.DTOs;
 namespace BilliardsBusinessLayer
 {
