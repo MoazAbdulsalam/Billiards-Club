@@ -28,7 +28,7 @@ namespace Billiards_Club.Users.Controls
             lblIsActive.Text = _User.IsActive.ToString();
             lblUserID.Text = _User.UserID.ToString();
         }
-        public async Task LoadUser(int UserID)
+        public async Task LoadUserAsync(int UserID)
         {
             _User = await clsUser.FindByUserIDAsync(UserID);
             if( _User == null )
