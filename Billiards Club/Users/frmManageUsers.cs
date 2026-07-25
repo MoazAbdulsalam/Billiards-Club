@@ -1,4 +1,9 @@
-﻿using BilliardsBusinessLayer;
+﻿using Billiards_Club.People.CustomControl;
+using Billiards_Club.Users;
+using BilliardsBusinessLayer;
+using BilliardsDataAccessLayer;
+using Microsoft.Data.SqlClient;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +11,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Billiards_Club.People.CustomControl;
 namespace Billiards_Club
 {
     public partial class frmManageUsers : Form
@@ -28,6 +32,7 @@ namespace Billiards_Club
             _dtUsers = await clsUser.GetAllUsersAsync();
             dgvListUsers.DataSource = _dtUsers;
             cbFilter.SelectedIndex = 0;
+            cbIsActive.SelectedIndex = 0;
             if (dgvListUsers.Rows.Count > 0)
             {
                 dgvListUsers.Columns[0].HeaderText = "User ID";
@@ -119,7 +124,7 @@ namespace Billiards_Club
 
         private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are You Sure You Want To Delete This Person With ID " + Convert.ToInt32(dgvListUsers.CurrentRow.Cells[0].Value), "Deleting Person", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show("Are You Sure You Want To Delete This User With ID " + Convert.ToInt32(dgvListUsers.CurrentRow.Cells[0].Value), "Deleting Person", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
 
                 if (!await clsUser.DeleteUserAsync(Convert.ToInt32(dgvListUsers.CurrentRow.Cells[0].Value)))
@@ -135,34 +140,63 @@ namespace Billiards_Club
             await _RefreshUsersData();
         }
 
-        private void addNewUserToolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void addNewUserToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            using (frmAddEditUser frm = new frmAddEditUser())
+            {
+                frm.ShowDialog();
+            }
+            await _RefreshUsersData();
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            using (frmAddEditUser frm = new frmAddEditUser((int)dgvListUsers.CurrentRow.Cells[0].Value))
+            {
+                frm.ShowDialog();
+            }
+            await _RefreshUsersData();
         }
 
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            using (frmChangePassword frm = new frmChangePassword((int)dgvListUsers.CurrentRow.Cells[0].Value))
+            {
+                frm.ShowDialog();
+            }
+            await _RefreshUsersData();
         }
 
-        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            using (frmUserInfo frm = new frmUserInfo((int)dgvListUsers.CurrentRow.Cells[0].Value))
+            {
+                frm.ShowDialog();
+            }
+            await _RefreshUsersData();
         }
 
-        private void btnAddNewPerson_Click(object sender, EventArgs e)
+        private async void btnAddNewUser_Click(object sender, EventArgs e)
         {
-
+            using (frmAddEditUser frm = new frmAddEditUser())
+            {
+                frm.ShowDialog();
+            }
+            await _RefreshUsersData();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void dgvListUsers_DoubleClick(object sender, EventArgs e)
+        {
+            using (frmUserInfo frm = new frmUserInfo((int)dgvListUsers.CurrentRow.Cells[0].Value))
+            {
+                frm.ShowDialog();
+            }
+            await _RefreshUsersData();
         }
     }
 }

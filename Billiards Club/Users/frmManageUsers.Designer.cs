@@ -37,13 +37,8 @@
             label3 = new Label();
             label2 = new Label();
             btnClose = new Button();
-            btnAddNewPerson = new Button();
+            btnAddNewUser = new Button();
             dgvListUsers = new DataGridView();
-            ccTextBoxSearch = new Billiards_Club.People.CustomControl.ccTextBox();
-            pictureBox1 = new PictureBox();
-            cbFilter = new ComboBox();
-            label1 = new Label();
-            cbIsActive = new ComboBox();
             cmUser = new ContextMenuStrip(components);
             showDetailsToolStripMenuItem = new ToolStripMenuItem();
             addNewUserToolStripMenuItem = new ToolStripSeparator();
@@ -55,16 +50,21 @@
             sendEmailToolStripMenuItem = new ToolStripMenuItem();
             phoneToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
+            ccTextBoxSearch = new Billiards_Club.People.CustomControl.ccTextBox();
+            pictureBox1 = new PictureBox();
+            cbFilter = new ComboBox();
+            label1 = new Label();
+            cbIsActive = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvListUsers).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             cmUser.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblRecordCount
             // 
             lblRecordCount.AutoSize = true;
             lblRecordCount.Font = new Font("Segoe UI", 9F);
-            lblRecordCount.Location = new Point(1206, 618);
+            lblRecordCount.Location = new Point(1183, 621);
             lblRecordCount.Name = "lblRecordCount";
             lblRecordCount.Size = new Size(30, 20);
             lblRecordCount.TabIndex = 25;
@@ -74,7 +74,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F);
-            label3.Location = new Point(1125, 618);
+            label3.Location = new Point(1102, 621);
             label3.Name = "label3";
             label3.Size = new Size(75, 20);
             label3.TabIndex = 24;
@@ -106,16 +106,16 @@
             btnClose.UseVisualStyleBackColor = false;
             btnClose.Click += btnClose_Click;
             // 
-            // btnAddNewPerson
+            // btnAddNewUser
             // 
-            btnAddNewPerson.BackColor = Color.FromArgb(126, 87, 194);
-            btnAddNewPerson.Image = (Image)resources.GetObject("btnAddNewPerson.Image");
-            btnAddNewPerson.Location = new Point(16, 530);
-            btnAddNewPerson.Name = "btnAddNewPerson";
-            btnAddNewPerson.Size = new Size(137, 85);
-            btnAddNewPerson.TabIndex = 21;
-            btnAddNewPerson.UseVisualStyleBackColor = false;
-            btnAddNewPerson.Click += btnAddNewPerson_Click;
+            btnAddNewUser.BackColor = Color.FromArgb(126, 87, 194);
+            btnAddNewUser.Image = (Image)resources.GetObject("btnAddNewUser.Image");
+            btnAddNewUser.Location = new Point(16, 530);
+            btnAddNewUser.Name = "btnAddNewUser";
+            btnAddNewUser.Size = new Size(137, 85);
+            btnAddNewUser.TabIndex = 21;
+            btnAddNewUser.UseVisualStyleBackColor = false;
+            btnAddNewUser.Click += btnAddNewUser_Click;
             // 
             // dgvListUsers
             // 
@@ -135,6 +135,7 @@
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
             dgvListUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvListUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvListUsers.ContextMenuStrip = cmUser;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = Color.White;
             dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
@@ -158,64 +159,9 @@
             dgvListUsers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgvListUsers.RowHeadersVisible = false;
             dgvListUsers.RowHeadersWidth = 51;
-            dgvListUsers.Size = new Size(926, 552);
+            dgvListUsers.Size = new Size(910, 552);
             dgvListUsers.TabIndex = 17;
-            // 
-            // ccTextBoxSearch
-            // 
-            ccTextBoxSearch.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
-            ccTextBoxSearch.IsRequired = true;
-            ccTextBoxSearch.Location = new Point(16, 337);
-            ccTextBoxSearch.Name = "ccTextBoxSearch";
-            ccTextBoxSearch.Size = new Size(280, 27);
-            ccTextBoxSearch.TabIndex = 20;
-            ccTextBoxSearch.Visible = false;
-            ccTextBoxSearch.TextChanged += ccTextBoxSearch_TextChanged;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(7, 67);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(289, 196);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 16;
-            pictureBox1.TabStop = false;
-            // 
-            // cbFilter
-            // 
-            cbFilter.BackColor = Color.Lavender;
-            cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbFilter.FormattingEnabled = true;
-            cbFilter.Items.AddRange(new object[] { "None", "User ID", "Person ID", "Full Name", "User Name", "Is Active" });
-            cbFilter.Location = new Point(113, 279);
-            cbFilter.Name = "cbFilter";
-            cbFilter.Size = new Size(183, 28);
-            cbFilter.TabIndex = 19;
-            cbFilter.SelectedIndexChanged += cbFilter_SelectedIndexChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(16, 282);
-            label1.Name = "label1";
-            label1.Size = new Size(91, 28);
-            label1.TabIndex = 18;
-            label1.Text = "FilterBy  :";
-            // 
-            // cbIsActive
-            // 
-            cbIsActive.BackColor = Color.Lavender;
-            cbIsActive.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbIsActive.FormattingEnabled = true;
-            cbIsActive.Items.AddRange(new object[] { "All", "Yes", "No" });
-            cbIsActive.Location = new Point(113, 336);
-            cbIsActive.Name = "cbIsActive";
-            cbIsActive.Size = new Size(183, 28);
-            cbIsActive.TabIndex = 26;
-            cbIsActive.Visible = false;
-            cbIsActive.SelectedIndexChanged += cbIsActive_SelectedIndexChanged;
+            dgvListUsers.DoubleClick += dgvListUsers_DoubleClick;
             // 
             // cmUser
             // 
@@ -287,18 +233,74 @@
             toolStripMenuItem3.Size = new Size(193, 24);
             toolStripMenuItem3.Text = " ";
             // 
+            // ccTextBoxSearch
+            // 
+            ccTextBoxSearch.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
+            ccTextBoxSearch.IsRequired = true;
+            ccTextBoxSearch.Location = new Point(16, 337);
+            ccTextBoxSearch.Name = "ccTextBoxSearch";
+            ccTextBoxSearch.Size = new Size(280, 27);
+            ccTextBoxSearch.TabIndex = 20;
+            ccTextBoxSearch.Visible = false;
+            ccTextBoxSearch.TextChanged += ccTextBoxSearch_TextChanged;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(7, 67);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(289, 196);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
+            // 
+            // cbFilter
+            // 
+            cbFilter.BackColor = Color.Lavender;
+            cbFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbFilter.FormattingEnabled = true;
+            cbFilter.Items.AddRange(new object[] { "None", "User ID", "Person ID", "Full Name", "User Name", "Is Active" });
+            cbFilter.Location = new Point(113, 279);
+            cbFilter.Name = "cbFilter";
+            cbFilter.Size = new Size(183, 28);
+            cbFilter.TabIndex = 19;
+            cbFilter.SelectedIndexChanged += cbFilter_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(16, 282);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 28);
+            label1.TabIndex = 18;
+            label1.Text = "FilterBy  :";
+            // 
+            // cbIsActive
+            // 
+            cbIsActive.BackColor = Color.Lavender;
+            cbIsActive.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbIsActive.FormattingEnabled = true;
+            cbIsActive.Items.AddRange(new object[] { "All", "Yes", "No" });
+            cbIsActive.Location = new Point(113, 336);
+            cbIsActive.Name = "cbIsActive";
+            cbIsActive.Size = new Size(183, 28);
+            cbIsActive.TabIndex = 26;
+            cbIsActive.Visible = false;
+            cbIsActive.SelectedIndexChanged += cbIsActive_SelectedIndexChanged;
+            // 
             // frmManageUsers
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Lavender;
-            ClientSize = new Size(1242, 646);
+            ClientSize = new Size(1224, 646);
             Controls.Add(cbIsActive);
             Controls.Add(lblRecordCount);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(btnClose);
-            Controls.Add(btnAddNewPerson);
+            Controls.Add(btnAddNewUser);
             Controls.Add(dgvListUsers);
             Controls.Add(ccTextBoxSearch);
             Controls.Add(pictureBox1);
@@ -310,8 +312,8 @@
             Text = "Manage Users";
             Load += frmManageUsers_Load;
             ((System.ComponentModel.ISupportInitialize)dgvListUsers).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             cmUser.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -322,7 +324,7 @@
         private Label label3;
         private Label label2;
         private Button btnClose;
-        private Button btnAddNewPerson;
+        private Button btnAddNewUser;
         private DataGridView dgvListUsers;
         private People.CustomControl.ccTextBox ccTextBoxSearch;
         private PictureBox pictureBox1;
