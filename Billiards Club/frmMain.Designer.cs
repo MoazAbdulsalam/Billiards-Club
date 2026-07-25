@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             pictureBox1 = new PictureBox();
             menuStrip1 = new MenuStrip();
             peopleToolStripMenuItem = new ToolStripMenuItem();
@@ -45,7 +46,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackColor = Color.LavenderBlush;
+            pictureBox1.BackColor = Color.FromArgb(48, 25, 52);
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = Properties.Resources._8_ball;
             pictureBox1.Location = new Point(0, 0);
@@ -154,6 +155,7 @@
             Controls.Add(pictureBox1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "frmMain";

@@ -7,7 +7,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>8-ball.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="8-ball.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BilliardsBusinessLayer\BilliardsBusinessLayer.csproj" />

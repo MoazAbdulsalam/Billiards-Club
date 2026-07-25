@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             btnClose = new Button();
             label1 = new Label();
             label2 = new Label();
@@ -196,6 +197,7 @@
             Controls.Add(btnClose);
             Controls.Add(pictureBox3);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
