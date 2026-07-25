@@ -74,9 +74,12 @@
             // 
             // usersToolStripMenuItem
             // 
+            usersToolStripMenuItem.Image = Properties.Resources.users_64;
+            usersToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
             usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            usersToolStripMenuItem.Size = new Size(133, 68);
+            usersToolStripMenuItem.Size = new Size(197, 68);
             usersToolStripMenuItem.Text = "Users";
+            usersToolStripMenuItem.Click += usersToolStripMenuItem_Click;
             // 
             // playersToolStripMenuItem
             // 

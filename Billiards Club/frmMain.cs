@@ -12,7 +12,7 @@ namespace Billiards_Club
     using System.Drawing;
     using System.Windows.Forms;
 
-   
+
     public partial class frmMain : Form
     {
         public frmMain()
@@ -31,6 +31,12 @@ namespace Billiards_Club
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
             menuStrip1.BackColor = Color.BlueViolet;
             menuStrip1.ForeColor = Color.White;
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (frmManageUsers frm = new frmManageUsers())
+                frm.ShowDialog();
         }
     }
 }

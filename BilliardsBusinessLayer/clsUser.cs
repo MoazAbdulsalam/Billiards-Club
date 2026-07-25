@@ -6,7 +6,7 @@ using Shared;
 using BilliardsDataAccessLayer.DTOs;
 namespace BilliardsBusinessLayer
 {
-    class clsUser
+    public class clsUser
     {
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode { get; private set; } = enMode.AddNew;
