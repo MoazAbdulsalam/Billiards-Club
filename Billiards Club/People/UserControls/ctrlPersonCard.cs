@@ -29,6 +29,7 @@ namespace Billiards_Club.People.UserControls
             lblPhone.Text = "[???]";
             pbPersonImage.Image = Resources.Male_512;
             llEditPersonInfo.Enabled = false;
+            _PersonID = null;
 
         }
         private void _LoadPersonImage()
