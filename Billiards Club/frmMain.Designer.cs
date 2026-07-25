@@ -34,14 +34,20 @@
             usersToolStripMenuItem = new ToolStripMenuItem();
             playersToolStripMenuItem = new ToolStripMenuItem();
             tablesToolStripMenuItem = new ToolStripMenuItem();
+            accountSettingsToolStripMenuItem = new ToolStripMenuItem();
+            SignOutToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripSeparator();
+            changePasswordToolStripMenuItem = new ToolStripMenuItem();
+            currentUserInfoToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.LavenderBlush;
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources._8_Ball_Pool_Neon_Dallas_Free_Wallpaper_1920x1080_9d5191ccb7;
+            pictureBox1.Image = Properties.Resources._8_ball;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(1431, 691);
@@ -55,7 +61,7 @@
             menuStrip1.Dock = DockStyle.Bottom;
             menuStrip1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { peopleToolStripMenuItem, usersToolStripMenuItem, playersToolStripMenuItem, tablesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { peopleToolStripMenuItem, usersToolStripMenuItem, playersToolStripMenuItem, tablesToolStripMenuItem, accountSettingsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 619);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.RenderMode = ToolStripRenderMode.System;
@@ -93,6 +99,49 @@
             tablesToolStripMenuItem.Size = new Size(146, 68);
             tablesToolStripMenuItem.Text = "Tables";
             // 
+            // accountSettingsToolStripMenuItem
+            // 
+            accountSettingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { SignOutToolStripMenuItem, toolStripMenuItem1, changePasswordToolStripMenuItem, currentUserInfoToolStripMenuItem });
+            accountSettingsToolStripMenuItem.Image = Properties.Resources.account_settings_64;
+            accountSettingsToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            accountSettingsToolStripMenuItem.Name = "accountSettingsToolStripMenuItem";
+            accountSettingsToolStripMenuItem.Size = new Size(401, 68);
+            accountSettingsToolStripMenuItem.Text = "Account Settings";
+            // 
+            // SignOutToolStripMenuItem
+            // 
+            SignOutToolStripMenuItem.Font = new Font("Segoe UI", 12F);
+            SignOutToolStripMenuItem.Image = Properties.Resources.sign_out_32__2;
+            SignOutToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            SignOutToolStripMenuItem.Name = "SignOutToolStripMenuItem";
+            SignOutToolStripMenuItem.Size = new Size(273, 38);
+            SignOutToolStripMenuItem.Text = "Sign Out";
+            SignOutToolStripMenuItem.Click += SignOutToolStripMenuItem_Click;
+            // 
+            // toolStripMenuItem1
+            // 
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.Size = new Size(270, 6);
+            // 
+            // changePasswordToolStripMenuItem
+            // 
+            changePasswordToolStripMenuItem.Font = new Font("Segoe UI", 12F);
+            changePasswordToolStripMenuItem.Image = Properties.Resources.Password_32;
+            changePasswordToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
+            changePasswordToolStripMenuItem.Size = new Size(273, 38);
+            changePasswordToolStripMenuItem.Text = "Change Password";
+            changePasswordToolStripMenuItem.Click += changePasswordToolStripMenuItem_Click;
+            // 
+            // currentUserInfoToolStripMenuItem
+            // 
+            currentUserInfoToolStripMenuItem.Font = new Font("Segoe UI", 12F);
+            currentUserInfoToolStripMenuItem.Image = Properties.Resources.PersonDetails_32;
+            currentUserInfoToolStripMenuItem.Name = "currentUserInfoToolStripMenuItem";
+            currentUserInfoToolStripMenuItem.Size = new Size(273, 38);
+            currentUserInfoToolStripMenuItem.Text = "Current User Info";
+            currentUserInfoToolStripMenuItem.Click += currentUserInfoToolStripMenuItem_Click;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -111,6 +160,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main ";
             WindowState = FormWindowState.Maximized;
+            FormClosed += frmMain_FormClosed;
             Load += frmMain_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             menuStrip1.ResumeLayout(false);
@@ -127,5 +177,10 @@
         private ToolStripMenuItem usersToolStripMenuItem;
         private ToolStripMenuItem playersToolStripMenuItem;
         private ToolStripMenuItem tablesToolStripMenuItem;
+        private ToolStripMenuItem accountSettingsToolStripMenuItem;
+        private ToolStripMenuItem SignOutToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem1;
+        private ToolStripMenuItem changePasswordToolStripMenuItem;
+        private ToolStripMenuItem currentUserInfoToolStripMenuItem;
     }
 }

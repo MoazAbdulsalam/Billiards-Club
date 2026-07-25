@@ -1,4 +1,5 @@
 using Billiards_Club.People;
+using Billiards_Club.Users;
 
 namespace Billiards_Club
 {
@@ -13,7 +14,8 @@ namespace Billiards_Club
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmMain());
+            //Moa67 , 6767
+            Application.Run(new frmLogin());
         }
     }
 }

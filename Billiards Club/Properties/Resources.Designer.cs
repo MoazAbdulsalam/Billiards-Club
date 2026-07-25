@@ -63,9 +63,29 @@ namespace Billiards_Club.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _8_ball {
+            get {
+                object obj = ResourceManager.GetObject("8-ball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _8_Ball_Pool_Neon_Dallas_Free_Wallpaper_1920x1080_9d5191ccb7 {
             get {
                 object obj = ResourceManager.GetObject("8_Ball_Pool_Neon_Dallas_Free_Wallpaper_1920x1080_9d5191ccb7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap account_settings_64 {
+            get {
+                object obj = ResourceManager.GetObject("account_settings 64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +126,66 @@ namespace Billiards_Club.Properties {
         internal static System.Drawing.Bitmap Address_321 {
             get {
                 object obj = ResourceManager.GetObject("Address 321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ball {
+            get {
+                object obj = ResourceManager.GetObject("ball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ball1 {
+            get {
+                object obj = ResourceManager.GetObject("ball1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap billiard {
+            get {
+                object obj = ResourceManager.GetObject("billiard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap billiard_ball {
+            get {
+                object obj = ResourceManager.GetObject("billiard-ball", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap billiard_ball1 {
+            get {
+                object obj = ResourceManager.GetObject("billiard-ball1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap billiard1 {
+            get {
+                object obj = ResourceManager.GetObject("billiard1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,6 +343,16 @@ namespace Billiards_Club.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Password_32 {
+            get {
+                object obj = ResourceManager.GetObject("Password 32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap People_400 {
             get {
                 object obj = ResourceManager.GetObject("People 400", resourceCulture);
@@ -333,6 +423,26 @@ namespace Billiards_Club.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pool_table {
+            get {
+                object obj = ResourceManager.GetObject("pool-table", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pool_table1 {
+            get {
+                object obj = ResourceManager.GetObject("pool-table1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save_32 {
             get {
                 object obj = ResourceManager.GetObject("Save 32", resourceCulture);
@@ -346,6 +456,26 @@ namespace Billiards_Club.Properties {
         internal static System.Drawing.Bitmap SearchPerson {
             get {
                 object obj = ResourceManager.GetObject("SearchPerson", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sign_out_32__2 {
+            get {
+                object obj = ResourceManager.GetObject("sign_out 32 -2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap snooker_1_ {
+            get {
+                object obj = ResourceManager.GetObject("snooker(1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
