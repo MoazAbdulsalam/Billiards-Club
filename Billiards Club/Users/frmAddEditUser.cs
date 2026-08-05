@@ -26,6 +26,7 @@ namespace Billiards_Club.Users
         {
             InitializeComponent();
             Mode = enMode.Update;
+            
             _UserID = userID;
         }
         async Task _LoadDataAsync()
@@ -110,6 +111,7 @@ namespace Billiards_Club.Users
             {
                 MessageBox.Show(" Saved Successfully", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Mode = enMode.Update;
+                ctrlPersonCardWithFilter1.FilterEnabled = false;
                 lblHeader.Text = "   Update User";
                 lblUserID.Text = _User.UserID.ToString();
             }
