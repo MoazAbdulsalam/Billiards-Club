@@ -9,7 +9,7 @@ namespace Billiards_Club.Classes
 {
     public class clsGlobals
     {
-        static string keyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\DVLD";
+        static string keyPath = @"HKEY_LOCAL_MACHINE\SOFTWARE\BilliardsClub";
 
         public static clsUser CurrentUser { get; set; }
         private static string Encrypt(string txt, char key = 'k')

@@ -316,7 +316,7 @@ namespace BilliardsDataAccessLayer
                     {
                         await conn.OpenAsync();
                         await command.ExecuteNonQueryAsync();
-                        found = (int)returnParameter.Value == 1;
+                        found = Convert.ToInt32(returnParameter.Value) == 1;
                     }
                     catch (Exception ex)
                     {

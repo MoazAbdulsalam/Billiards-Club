@@ -28,9 +28,9 @@ namespace BilliardsDataAccessLayer
             UserDTO User = null;
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "SELECT * FROM Users WHERE UserID=@UserID ";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand("SP_GetUserInfoByUserID", connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@UserID", UserID);
                     try
                     {
@@ -57,9 +57,9 @@ namespace BilliardsDataAccessLayer
             UserDTO User = null;
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "SELECT * FROM Users WHERE UserName=@UserName AND Password=@Password ";
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlCommand command = new SqlCommand("SP_GetUserInfoUserNameAndPassword", connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Password", Password);
                     command.Parameters.AddWithValue("@UserName", UserName);
                     try
@@ -87,27 +87,26 @@ namespace BilliardsDataAccessLayer
             int? id = null;
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"INSERT INTO Users
-                           (PersonID
-                           ,UserName
-                           ,Password
-                           ,IsActive)
-                     VALUES
-                      (@PersonID,@UserName,@Password,@IsActive) 
-                      SELECT SCOPE_IDENTITY()";
-                using (SqlCommand command = new SqlCommand(query, connection))
+
+                using (SqlCommand command = new SqlCommand("SP_AddNewUser", connection))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", User.PersonID);
                     command.Parameters.AddWithValue("@UserName", User.UserName);
                     command.Parameters.AddWithValue("@Password", User.Password);
                     command.Parameters.AddWithValue("@IsActive", User.IsActive);
+                    SqlParameter outputIdParam = new SqlParameter("@NewUserID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(outputIdParam);
                     try
                     {
                         await connection.OpenAsync();
-                        object? result = await command.ExecuteScalarAsync();
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                        await command.ExecuteNonQueryAsync();
+                        if(outputIdParam.Value != DBNull.Value)
                         {
-                            id = insertedID;
+                            id = (int)outputIdParam.Value;
                         }
 
                     }
@@ -128,18 +127,9 @@ namespace BilliardsDataAccessLayer
             int rowsAffected = 0;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-
-
-
-                string query = @"UPDATE Users
-                              SET PersonID = @PersonID, 
-                                 UserName = @UserName,
-                                 
-                                 IsActive = @IsActive
-                            WHERE UserID =@UserID ";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_UpdateUser", conn))
                 {
-
+                    command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@PersonID", User.PersonID);
                     command.Parameters.AddWithValue("@UserName", User.UserName);
@@ -164,20 +154,15 @@ namespace BilliardsDataAccessLayer
             }
             return rowsAffected > 0;
         }
-
         public static async Task<DataTable> GetAllUsersAsync()
         {
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
 
-
-                string query = @"SELECT Users.UserID, Users.PersonID, FullName =People.FirstName +' '+ People.SecondName+' '+ ISNULL( People.ThirdName,'')+' '+ People.LastName, Users.UserName, Users.IsActive
-                           FROM     People INNER JOIN
-                            Users ON People.PersonID = Users.PersonID";
-
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_GetAllUsers", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     try
                     {
                         await conn.OpenAsync();
@@ -211,10 +196,9 @@ namespace BilliardsDataAccessLayer
             {
 
 
-                string query = "DELETE Users WHERE userID=@userID";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_DeleteUser", conn))
                 {
-
+                    command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@userID", userID);
 
@@ -241,15 +225,22 @@ namespace BilliardsDataAccessLayer
             bool found = false;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "Select found=1 from Users WHERE UserID=@UserID";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_IsUserExistByUserID", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@UserID", UserID);
+                    SqlParameter outputFoundParam = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                    command.Parameters.Add(outputFoundParam);
                     try
                     {
-                       await conn.OpenAsync();
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                            found = reader.HasRows;
+                       await conn.OpenAsync(); 
+                       await command.ExecuteNonQueryAsync();
+
+                        if (outputFoundParam.Value != DBNull.Value)
+                            found = Convert.ToInt32(outputFoundParam.Value) == 1;
                     }
                     catch (Exception ex)
                     {
@@ -266,15 +257,24 @@ namespace BilliardsDataAccessLayer
             bool found = false;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "Select found=1 from Users WHERE UserName=@UserName";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_IsUserExistByUserName", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+
                     command.Parameters.AddWithValue("@UserName", UserName);
+                    SqlParameter ReturnParameter = new SqlParameter(@"ReturnVal", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                     command.Parameters.Add(ReturnParameter);
+
                     try
                     {
                         await conn.OpenAsync();
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync()) 
-                            found = reader.HasRows;
+                        await command.ExecuteNonQueryAsync();
+
+                        if (ReturnParameter.Value != DBNull.Value)
+                            found = Convert.ToInt32(ReturnParameter.Value) == 1;
                     }
                     catch (Exception ex)
                     {
@@ -293,17 +293,23 @@ namespace BilliardsDataAccessLayer
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
 
-                string query = "Select found=1 from Users WHERE PersonID=@PersonID";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_IsUserExistForPersonID", conn))
                 {
 
-
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", PersonID);
+                    SqlParameter ReturnParameter = new SqlParameter(@"ReturnVal", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                    command.Parameters.Add(ReturnParameter);
                     try
                     {
                         await conn.OpenAsync();
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                            found = reader.HasRows;
+                        await command.ExecuteNonQueryAsync();
+
+                        if (ReturnParameter.Value != DBNull.Value)
+                            found = Convert.ToInt32(ReturnParameter.Value) == 1;
                     }
                     catch (Exception ex)
                     {
@@ -318,22 +324,14 @@ namespace BilliardsDataAccessLayer
                 return found;
             }
         }
-
-
         public static async Task<bool> ChangePasswordAsync(int UserID, string NewPassword)
         {
             int rowsAffected = 0;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-
-
-                string query = @"UPDATE Users
-                              SET  
-                                 Password = @NewPassword
-                            WHERE UserID =@UserID ;";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_ChangePassword", conn))
                 {
-
+                    command.CommandType = CommandType.StoredProcedure;
 
                     command.Parameters.AddWithValue("@NewPassword", NewPassword);
                     command.Parameters.AddWithValue("@UserID", UserID);
