@@ -34,9 +34,9 @@ namespace BilliardsDataAccessLayer
             clsPersonDTO Person = null;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "SELECT * FROM People WHERE PersonID = @PersonID ;";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_GetPersonInfoById", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", PersonID);
                     try
                     {
@@ -69,9 +69,9 @@ namespace BilliardsDataAccessLayer
 
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "SELECT * FROM People WHERE NationalNo = @NationalNo ;";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_GetPersonInfoByNationalNo", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@NationalNo", NationalNo);
                     try
                     {
@@ -101,14 +101,12 @@ namespace BilliardsDataAccessLayer
             string Address, string Phone, string Email,string ImagePath)
         {
             int? PersonID = null;
-            using(SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
+                using (SqlCommand command = new SqlCommand("SP_AddNewPerson", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
 
-                string query = @"INSERT INTO People (NationalNo,FirstName,SecondName,ThirdName,LastName,DateOfBirth,Gender,Address,Phone,Email,ImagePath)
-                          VALUES (@NationalNo,@FirstName,@SecondName,@ThirdName,@LastName,@DateOfBirth,@Gender,@Address,@Phone,@Email,@ImagePath);
-                          SELECT SCOPE_IDENTITY();";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {  
                     command.Parameters.AddWithValue("@NationalNo", NationalNo);
                     command.Parameters.AddWithValue("@FirstName", FirstName);
                     command.Parameters.AddWithValue("@SecondName", SecondName);
@@ -117,29 +115,27 @@ namespace BilliardsDataAccessLayer
                     command.Parameters.AddWithValue("@Gender", Gender);
                     command.Parameters.AddWithValue("@Address", Address);
                     command.Parameters.AddWithValue("@Phone", Phone);
-                    if (!string.IsNullOrEmpty(ThirdName))
-                        command.Parameters.AddWithValue("@ThirdName", ThirdName);
-                    else
-                        command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
+                    command.Parameters.AddWithValue("@ThirdName",
+                        string.IsNullOrEmpty(ThirdName) ? DBNull.Value : ThirdName);
 
-                    if (!string.IsNullOrEmpty(Email))
-                        command.Parameters.AddWithValue("@Email", Email);
-                    else
-                        command.Parameters.AddWithValue("@Email", DBNull.Value);
+                    command.Parameters.AddWithValue("@Email",
+                        string.IsNullOrEmpty(Email) ? DBNull.Value : Email);
 
-                    if (!string.IsNullOrEmpty(ImagePath))
-                        command.Parameters.AddWithValue("@ImagePath", ImagePath);
-                    else
-                        command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
+                    command.Parameters.AddWithValue("@ImagePath",
+                        string.IsNullOrEmpty(ImagePath) ? DBNull.Value : ImagePath);
+                   
+                    SqlParameter outputParam = new SqlParameter("@NewPersonID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    command.Parameters.Add(outputParam);
+                   
                     try
                     {
                         await connection.OpenAsync();
-                        object result = await command.ExecuteScalarAsync();
-                        if (result != null && int.TryParse(result.ToString(), out int InsertedID))
-                        {
-                            PersonID = InsertedID;
-                        }
-
+                        await command.ExecuteNonQueryAsync();
+                        if (outputParam.Value != DBNull.Value)
+                            PersonID = Convert.ToInt32(outputParam.Value);
                     }
                     catch (Exception ex)
                     {
@@ -160,21 +156,10 @@ namespace BilliardsDataAccessLayer
             int rowsAffected = 0;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @"UPDATE People
-                              SET NationalNo = @NationalNo, 
-                                 FirstName = @FirstName,
-                                 SecondName = @SecondName,
-                                 ThirdName = @ThirdName, 
-                                 LastName = @LastName, 
-                                 DateOfBirth = @DateOfBirth, 
-                                 Gender = @Gender,
-                                 Address = @Address, 
-                                 Phone = @Phone, 
-                                 Email = @Email, 
-                                 ImagePath = @ImagePath
-                            WHERE PersonID =@PersonID ;";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_UpdatePerson", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+
                     command.Parameters.AddWithValue("@PersonID", PersonID);
 
                     command.Parameters.AddWithValue("@NationalNo", NationalNo);
@@ -186,20 +171,14 @@ namespace BilliardsDataAccessLayer
                     command.Parameters.AddWithValue("@Address", Address);
                     command.Parameters.AddWithValue("@Phone", Phone);
 
-                    if (!string.IsNullOrEmpty(ThirdName))
-                        command.Parameters.AddWithValue("@ThirdName", ThirdName);
-                    else
-                        command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
+                    command.Parameters.AddWithValue("@ThirdName",
+                        string.IsNullOrEmpty(ThirdName) ? DBNull.Value : ThirdName);
 
-                    if (!string.IsNullOrEmpty(Email))
-                        command.Parameters.AddWithValue("@Email", Email);
-                    else
-                        command.Parameters.AddWithValue("@Email", DBNull.Value);
+                    command.Parameters.AddWithValue("@Email",
+                        string.IsNullOrEmpty(Email) ? DBNull.Value : Email);
 
-                    if (!string.IsNullOrEmpty(ImagePath))
-                        command.Parameters.AddWithValue("@ImagePath", ImagePath);
-                    else
-                        command.Parameters.AddWithValue("@ImagePath", DBNull.Value);
+                    command.Parameters.AddWithValue("@ImagePath",
+                        string.IsNullOrEmpty(ImagePath) ? DBNull.Value : ImagePath);
                     try
                     {
                         await conn.OpenAsync();
@@ -208,7 +187,7 @@ namespace BilliardsDataAccessLayer
                     catch (Exception ex)
                     {
 
-                        string Location = "clsPeopleData → UpdatePerson";
+                        string Location = "clsPeopleData → UpdatePersonAsync";
                         clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
 
                         return false;
@@ -226,16 +205,10 @@ namespace BilliardsDataAccessLayer
             DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = @" SELECT People.PersonID, People.NationalNo, People.FirstName, People.SecondName, People.ThirdName, People.LastName, People.DateOfBirth, 
-	                   People.Gender,
-	                   CASE
-	                   When People.Gender=0 THEN 'Male'
-	                   ELSE 'Female'
-	                   End as GenderCaption,
-	                   People.Address, People.Phone, People.Email, People.ImagePath
-                       FROM  People ";
-                using (SqlCommand command = new SqlCommand(query, conn))
+
+                using (SqlCommand command = new SqlCommand("SP_GetAllPeople", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     try
                     {
                         await conn.OpenAsync();
@@ -249,7 +222,7 @@ namespace BilliardsDataAccessLayer
                     catch (Exception ex)
                     {
 
-                        string Location = "clsPeopleData → GetAllPeople";
+                        string Location = "clsPeopleData → GetAllPeopleAsync";
                         clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
 
                     }
@@ -264,9 +237,9 @@ namespace BilliardsDataAccessLayer
             int rowsAffected = 0;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                string query = "DELETE People WHERE PersonID=@PersonID";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_DeletePerson", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", PersonID);
 
                     try
@@ -278,7 +251,7 @@ namespace BilliardsDataAccessLayer
                     catch (Exception ex)
                     {
 
-                        string Location = "clsPeopleData → DeletePeron";
+                        string Location = "clsPeopleData → DeletePersonAsync";
                         clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
 
                         return false;
@@ -294,22 +267,26 @@ namespace BilliardsDataAccessLayer
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
 
-                string query = "Select found=1 from People WHERE NationalNo=@NationalNo";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_CheckPersonExistsByNationalNo", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@NationalNo", NationalNo);
+
+                    SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                    command.Parameters.Add(returnParameter);
                     try
                     {
                         await conn.OpenAsync();
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            found = reader.HasRows;
-                        }
+                        await command.ExecuteNonQueryAsync();
+                        found = (int)returnParameter.Value == 1;
                     }
                     catch (Exception ex)
                     {
 
-                        string Location = "clsPeopleData → IsPersonExist(nationalNo)";
+                        string Location = "clsPeopleData → IsPersonExistAsync(NationalNo)";
                         clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
 
                         return false;
@@ -325,22 +302,26 @@ namespace BilliardsDataAccessLayer
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
 
-                string query = "Select found=1 from People WHERE PersonId=@PersonID";
-                using (SqlCommand command = new SqlCommand(query, conn))
+                using (SqlCommand command = new SqlCommand("SP_CheckPersonExistsByPersonID", conn))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@PersonID", PersonId);
+
+                    SqlParameter returnParameter = new SqlParameter("@ReturnVal", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.ReturnValue
+                    };
+                    command.Parameters.Add(returnParameter);
                     try
                     {
                         await conn.OpenAsync();
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            found = reader.HasRows;
-                        }
+                        await command.ExecuteNonQueryAsync();
+                        found = (int)returnParameter.Value == 1;
                     }
                     catch (Exception ex)
                     {
 
-                        string Location = "clsPeopleData → IsPersonExist(PersonID)";
+                        string Location = "clsPeopleData → IsPersonExistAsync(PersonID)";
                         clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
 
                         return false;
