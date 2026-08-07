@@ -1,4 +1,5 @@
 using Billiards_Club.People;
+using Billiards_Club.Players;
 using Billiards_Club.Users;
 
 namespace Billiards_Club

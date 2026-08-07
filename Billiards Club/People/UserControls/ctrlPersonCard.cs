@@ -92,5 +92,9 @@ namespace Billiards_Club.People.UserControls
             frm.ShowDialog();
            await LoadPersonAsync(_Person.PersonID);
         }
+        public void Reset()
+        {
+            _ResetPersonInfo();
+        }
     }
 }

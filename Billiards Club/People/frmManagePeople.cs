@@ -28,6 +28,7 @@ namespace Billiards_Club.People
                                                          "Phone", "Email");
             dgvListPeople.DataSource = _dtPeople;
             lblRecordCount.Text = dgvListPeople.RowCount.ToString();
+            cmPerson.Enabled = dgvListPeople.RowCount > 0;
         }
         private async void frmManagePeople_Load(object sender, EventArgs e)
         {
@@ -77,6 +78,7 @@ namespace Billiards_Club.People
                     dgvListPeople.Columns[9].Width = 140;
                 }
                 lblRecordCount.Text = dgvListPeople.RowCount.ToString();
+                cmPerson.Enabled = dgvListPeople.RowCount > 0;
 
             }
         }

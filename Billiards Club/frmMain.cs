@@ -10,6 +10,7 @@ using System.Windows.Forms;
 namespace Billiards_Club
 {
     using Billiards_Club.Classes;
+    using Billiards_Club.Players;
     using Billiards_Club.Users;
     using System.Drawing;
     using System.Windows.Forms;
@@ -51,7 +52,7 @@ namespace Billiards_Club
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(frmChangePassword frm = new frmChangePassword(clsGlobals.CurrentUser.UserID.Value))
+            using (frmChangePassword frm = new frmChangePassword(clsGlobals.CurrentUser.UserID.Value))
                 frm.ShowDialog();
 
         }
@@ -68,6 +69,18 @@ namespace Billiards_Club
             _frmLogin.Clear();
             _frmLogin.Show();
             this.Close();
+        }
+
+        private void managePlayersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (frmManagePlayers frm = new frmManagePlayers())
+                frm.ShowDialog();
+        }
+
+        private void inactivePlayersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using(frmInactivePlayers frm = new frmInactivePlayers())
+                frm.ShowDialog();
         }
     }
 }

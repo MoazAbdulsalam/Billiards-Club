@@ -33,26 +33,26 @@
             tpPersonInfo = new TabPage();
             btnNext = new Button();
             ctrlPersonCardWithFilter1 = new Billiards_Club.People.UserControls.ctrlPersonCardWithFilter();
+            tpLoginInfo = new TabPage();
+            panelPassword = new Panel();
+            ccTextBoxPassword = new Billiards_Club.People.CustomControl.ccTextBox();
+            lblPassword = new Label();
+            ccTextBoxConfirmPassword = new Billiards_Club.People.CustomControl.ccTextBox();
+            lblconferm = new Label();
+            chbIsActive = new CheckBox();
+            ccTextBoxUserName = new Billiards_Club.People.CustomControl.ccTextBox();
+            label3 = new Label();
+            lblUserID = new Label();
+            label1 = new Label();
             btnSave = new Button();
             btnClose = new Button();
             lblHeader = new Label();
             errorProvider1 = new ErrorProvider(components);
-            label1 = new Label();
-            lblUserID = new Label();
-            label3 = new Label();
-            ccTextBoxUserName = new Billiards_Club.People.CustomControl.ccTextBox();
-            lblPassword = new Label();
-            ccTextBoxPassword = new Billiards_Club.People.CustomControl.ccTextBox();
-            lblconferm = new Label();
-            ccTextBoxConfirmPassword = new Billiards_Club.People.CustomControl.ccTextBox();
-            chbIsActive = new CheckBox();
-            tpLoginInfo = new TabPage();
-            panelPassword = new Panel();
             tabControl1.SuspendLayout();
             tpPersonInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             tpLoginInfo.SuspendLayout();
             panelPassword.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -103,6 +103,123 @@
             ctrlPersonCardWithFilter1.TabIndex = 0;
             ctrlPersonCardWithFilter1.OnPersonSelected += ctrlPersonCardWithFilter1_OnPersonSelected;
             // 
+            // tpLoginInfo
+            // 
+            tpLoginInfo.BackColor = Color.FromArgb(242, 232, 242);
+            tpLoginInfo.Controls.Add(panelPassword);
+            tpLoginInfo.Controls.Add(chbIsActive);
+            tpLoginInfo.Controls.Add(ccTextBoxUserName);
+            tpLoginInfo.Controls.Add(label3);
+            tpLoginInfo.Controls.Add(lblUserID);
+            tpLoginInfo.Controls.Add(label1);
+            tpLoginInfo.Font = new Font("Segoe UI", 12F);
+            tpLoginInfo.Location = new Point(4, 29);
+            tpLoginInfo.Name = "tpLoginInfo";
+            tpLoginInfo.Padding = new Padding(3);
+            tpLoginInfo.Size = new Size(833, 571);
+            tpLoginInfo.TabIndex = 1;
+            tpLoginInfo.Text = "Login Info";
+            // 
+            // panelPassword
+            // 
+            panelPassword.Controls.Add(ccTextBoxPassword);
+            panelPassword.Controls.Add(lblPassword);
+            panelPassword.Controls.Add(ccTextBoxConfirmPassword);
+            panelPassword.Controls.Add(lblconferm);
+            panelPassword.Location = new Point(36, 184);
+            panelPassword.Name = "panelPassword";
+            panelPassword.Size = new Size(476, 135);
+            panelPassword.TabIndex = 19;
+            // 
+            // ccTextBoxPassword
+            // 
+            ccTextBoxPassword.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
+            ccTextBoxPassword.IsRequired = true;
+            ccTextBoxPassword.Location = new Point(197, 21);
+            ccTextBoxPassword.MaxLength = 8;
+            ccTextBoxPassword.Name = "ccTextBoxPassword";
+            ccTextBoxPassword.Size = new Size(257, 34);
+            ccTextBoxPassword.TabIndex = 15;
+            ccTextBoxPassword.UseSystemPasswordChar = true;
+            ccTextBoxPassword.Validating += ccTextBoxPassword_Validating;
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new Point(79, 21);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(102, 28);
+            lblPassword.TabIndex = 14;
+            lblPassword.Text = "Password :";
+            // 
+            // ccTextBoxConfirmPassword
+            // 
+            ccTextBoxConfirmPassword.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
+            ccTextBoxConfirmPassword.IsRequired = true;
+            ccTextBoxConfirmPassword.Location = new Point(197, 87);
+            ccTextBoxConfirmPassword.MaxLength = 8;
+            ccTextBoxConfirmPassword.Name = "ccTextBoxConfirmPassword";
+            ccTextBoxConfirmPassword.Size = new Size(257, 34);
+            ccTextBoxConfirmPassword.TabIndex = 17;
+            ccTextBoxConfirmPassword.UseSystemPasswordChar = true;
+            ccTextBoxConfirmPassword.Validating += ccTextBoxConfirmPassword_Validating;
+            // 
+            // lblconferm
+            // 
+            lblconferm.AutoSize = true;
+            lblconferm.Location = new Point(4, 87);
+            lblconferm.Name = "lblconferm";
+            lblconferm.Size = new Size(177, 28);
+            lblconferm.TabIndex = 16;
+            lblconferm.Text = "Confirm Password :";
+            // 
+            // chbIsActive
+            // 
+            chbIsActive.AutoSize = true;
+            chbIsActive.Location = new Point(214, 315);
+            chbIsActive.Name = "chbIsActive";
+            chbIsActive.Size = new Size(106, 32);
+            chbIsActive.TabIndex = 18;
+            chbIsActive.Text = "Is Active";
+            chbIsActive.UseVisualStyleBackColor = true;
+            // 
+            // ccTextBoxUserName
+            // 
+            ccTextBoxUserName.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
+            ccTextBoxUserName.IsRequired = true;
+            ccTextBoxUserName.Location = new Point(235, 131);
+            ccTextBoxUserName.Name = "ccTextBoxUserName";
+            ccTextBoxUserName.Size = new Size(257, 34);
+            ccTextBoxUserName.TabIndex = 13;
+            ccTextBoxUserName.Validating += ccTextBoxUserName_Validating;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(104, 131);
+            label3.Name = "label3";
+            label3.Size = new Size(112, 28);
+            label3.TabIndex = 12;
+            label3.Text = "UserName :";
+            // 
+            // lblUserID
+            // 
+            lblUserID.AutoSize = true;
+            lblUserID.Location = new Point(224, 56);
+            lblUserID.Name = "lblUserID";
+            lblUserID.Size = new Size(51, 28);
+            lblUserID.TabIndex = 10;
+            lblUserID.Text = "[???]";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(139, 56);
+            label1.Name = "label1";
+            label1.Size = new Size(79, 28);
+            label1.TabIndex = 9;
+            label1.Text = "UserID :";
+            // 
             // btnSave
             // 
             btnSave.BackColor = Color.FromArgb(126, 87, 194);
@@ -149,123 +266,6 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(139, 56);
-            label1.Name = "label1";
-            label1.Size = new Size(79, 28);
-            label1.TabIndex = 9;
-            label1.Text = "UserID :";
-            // 
-            // lblUserID
-            // 
-            lblUserID.AutoSize = true;
-            lblUserID.Location = new Point(224, 56);
-            lblUserID.Name = "lblUserID";
-            lblUserID.Size = new Size(51, 28);
-            lblUserID.TabIndex = 10;
-            lblUserID.Text = "[???]";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(104, 131);
-            label3.Name = "label3";
-            label3.Size = new Size(112, 28);
-            label3.TabIndex = 12;
-            label3.Text = "UserName :";
-            // 
-            // ccTextBoxUserName
-            // 
-            ccTextBoxUserName.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
-            ccTextBoxUserName.IsRequired = true;
-            ccTextBoxUserName.Location = new Point(235, 131);
-            ccTextBoxUserName.Name = "ccTextBoxUserName";
-            ccTextBoxUserName.Size = new Size(257, 34);
-            ccTextBoxUserName.TabIndex = 13;
-            ccTextBoxUserName.Validating += ccTextBoxUserName_Validating;
-            // 
-            // lblPassword
-            // 
-            lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(79, 21);
-            lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(102, 28);
-            lblPassword.TabIndex = 14;
-            lblPassword.Text = "Password :";
-            // 
-            // ccTextBoxPassword
-            // 
-            ccTextBoxPassword.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
-            ccTextBoxPassword.IsRequired = true;
-            ccTextBoxPassword.Location = new Point(197, 21);
-            ccTextBoxPassword.MaxLength = 8;
-            ccTextBoxPassword.Name = "ccTextBoxPassword";
-            ccTextBoxPassword.Size = new Size(257, 34);
-            ccTextBoxPassword.TabIndex = 15;
-            ccTextBoxPassword.UseSystemPasswordChar = true;
-            ccTextBoxPassword.Validating += ccTextBoxPassword_Validating;
-            // 
-            // lblconferm
-            // 
-            lblconferm.AutoSize = true;
-            lblconferm.Location = new Point(4, 87);
-            lblconferm.Name = "lblconferm";
-            lblconferm.Size = new Size(177, 28);
-            lblconferm.TabIndex = 16;
-            lblconferm.Text = "Confirm Password :";
-            // 
-            // ccTextBoxConfirmPassword
-            // 
-            ccTextBoxConfirmPassword.InputType = People.CustomControl.ccTextBox.InputTypeEnum.TextInput;
-            ccTextBoxConfirmPassword.IsRequired = true;
-            ccTextBoxConfirmPassword.Location = new Point(197, 87);
-            ccTextBoxConfirmPassword.MaxLength = 8;
-            ccTextBoxConfirmPassword.Name = "ccTextBoxConfirmPassword";
-            ccTextBoxConfirmPassword.Size = new Size(257, 34);
-            ccTextBoxConfirmPassword.TabIndex = 17;
-            ccTextBoxConfirmPassword.UseSystemPasswordChar = true;
-            ccTextBoxConfirmPassword.Validating += ccTextBoxConfirmPassword_Validating;
-            // 
-            // chbIsActive
-            // 
-            chbIsActive.AutoSize = true;
-            chbIsActive.Location = new Point(214, 315);
-            chbIsActive.Name = "chbIsActive";
-            chbIsActive.Size = new Size(106, 32);
-            chbIsActive.TabIndex = 18;
-            chbIsActive.Text = "Is Active";
-            chbIsActive.UseVisualStyleBackColor = true;
-            // 
-            // tpLoginInfo
-            // 
-            tpLoginInfo.BackColor = Color.FromArgb(242, 232, 242);
-            tpLoginInfo.Controls.Add(panelPassword);
-            tpLoginInfo.Controls.Add(chbIsActive);
-            tpLoginInfo.Controls.Add(ccTextBoxUserName);
-            tpLoginInfo.Controls.Add(label3);
-            tpLoginInfo.Controls.Add(lblUserID);
-            tpLoginInfo.Controls.Add(label1);
-            tpLoginInfo.Font = new Font("Segoe UI", 12F);
-            tpLoginInfo.Location = new Point(4, 29);
-            tpLoginInfo.Name = "tpLoginInfo";
-            tpLoginInfo.Padding = new Padding(3);
-            tpLoginInfo.Size = new Size(833, 571);
-            tpLoginInfo.TabIndex = 1;
-            tpLoginInfo.Text = "Login Info";
-            // 
-            // panelPassword
-            // 
-            panelPassword.Controls.Add(ccTextBoxPassword);
-            panelPassword.Controls.Add(lblPassword);
-            panelPassword.Controls.Add(ccTextBoxConfirmPassword);
-            panelPassword.Controls.Add(lblconferm);
-            panelPassword.Location = new Point(36, 184);
-            panelPassword.Name = "panelPassword";
-            panelPassword.Size = new Size(476, 135);
-            panelPassword.TabIndex = 19;
-            // 
             // frmAddEditUser
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -283,11 +283,11 @@
             Load += frmAddEditUser_Load;
             tabControl1.ResumeLayout(false);
             tpPersonInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             tpLoginInfo.ResumeLayout(false);
             tpLoginInfo.PerformLayout();
             panelPassword.ResumeLayout(false);
             panelPassword.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

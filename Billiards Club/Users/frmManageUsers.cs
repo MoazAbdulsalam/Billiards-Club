@@ -26,6 +26,7 @@ namespace Billiards_Club
             _dtUsers.Clear();
             _dtUsers.Merge(dt);
             lblRecordCount.Text = dgvListUsers.Rows.Count.ToString();
+            cmUser.Enabled = dgvListUsers.Rows.Count > 0;
         }
         private async void frmManageUsers_Load(object sender, EventArgs e)
         {
@@ -51,6 +52,7 @@ namespace Billiards_Club
                 dgvListUsers.Columns[4].Width = 120;
             }
             lblRecordCount.Text = dgvListUsers.Rows.Count.ToString();
+            cmUser.Enabled = dgvListUsers.Rows.Count > 0;
 
         }
 

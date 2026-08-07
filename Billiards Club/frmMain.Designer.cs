@@ -34,6 +34,8 @@
             peopleToolStripMenuItem = new ToolStripMenuItem();
             usersToolStripMenuItem = new ToolStripMenuItem();
             playersToolStripMenuItem = new ToolStripMenuItem();
+            inactivePlayersToolStripMenuItem = new ToolStripMenuItem();
+            managePlayersToolStripMenuItem = new ToolStripMenuItem();
             tablesToolStripMenuItem = new ToolStripMenuItem();
             accountSettingsToolStripMenuItem = new ToolStripMenuItem();
             SignOutToolStripMenuItem = new ToolStripMenuItem();
@@ -90,9 +92,31 @@
             // 
             // playersToolStripMenuItem
             // 
+            playersToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { inactivePlayersToolStripMenuItem, managePlayersToolStripMenuItem });
+            playersToolStripMenuItem.Image = Properties.Resources.team;
             playersToolStripMenuItem.Name = "playersToolStripMenuItem";
-            playersToolStripMenuItem.Size = new Size(160, 68);
+            playersToolStripMenuItem.Size = new Size(180, 68);
             playersToolStripMenuItem.Text = "Players";
+            // 
+            // inactivePlayersToolStripMenuItem
+            // 
+            inactivePlayersToolStripMenuItem.Font = new Font("Segoe UI", 20F);
+            inactivePlayersToolStripMenuItem.Image = Properties.Resources.Delete_32;
+            inactivePlayersToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            inactivePlayersToolStripMenuItem.Name = "inactivePlayersToolStripMenuItem";
+            inactivePlayersToolStripMenuItem.Size = new Size(364, 50);
+            inactivePlayersToolStripMenuItem.Text = "Inactive Players";
+            inactivePlayersToolStripMenuItem.Click += inactivePlayersToolStripMenuItem_Click;
+            // 
+            // managePlayersToolStripMenuItem
+            // 
+            managePlayersToolStripMenuItem.Font = new Font("Segoe UI", 20F);
+            managePlayersToolStripMenuItem.Image = Properties.Resources.PersonDetails_32;
+            managePlayersToolStripMenuItem.ImageScaling = ToolStripItemImageScaling.None;
+            managePlayersToolStripMenuItem.Name = "managePlayersToolStripMenuItem";
+            managePlayersToolStripMenuItem.Size = new Size(364, 50);
+            managePlayersToolStripMenuItem.Text = "Manage Players";
+            managePlayersToolStripMenuItem.Click += managePlayersToolStripMenuItem_Click;
             // 
             // tablesToolStripMenuItem
             // 
@@ -184,5 +208,7 @@
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem changePasswordToolStripMenuItem;
         private ToolStripMenuItem currentUserInfoToolStripMenuItem;
+        private ToolStripMenuItem inactivePlayersToolStripMenuItem;
+        private ToolStripMenuItem managePlayersToolStripMenuItem;
     }
 }
