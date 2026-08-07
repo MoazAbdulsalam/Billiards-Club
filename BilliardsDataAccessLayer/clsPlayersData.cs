@@ -119,6 +119,37 @@ namespace BilliardsDataAccessLayer
             }
             return NewPlayerID;
         }
+        public static async Task<bool> UpdatePlayerAsync(int PlayerID, DateTime DateOfJoin)
+        {
+            int rowsAffected = 0;
+
+            using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_UpdatePlayer", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@PlayerID", PlayerID);
+                    cmd.Parameters.AddWithValue("@DateOfJoin", DateOfJoin);
+
+                    try
+                    {
+                        await conn.OpenAsync();
+
+                        rowsAffected = await cmd.ExecuteNonQueryAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        string Location = "clsPlayersData → UpdatePlayerAsync";
+                        clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
+
+                        return false;
+                    }
+                }
+            }
+
+            return rowsAffected > 0;
+        }
         public static async Task<bool> DeletePlayerAsync(int PlayerID)
         {
             bool IsDeleted = false;
@@ -143,9 +174,9 @@ namespace BilliardsDataAccessLayer
             }
             return IsDeleted;
         }
-        public static async Task<DataTable?> GetAllPlayersAsync()
+        public static async Task<DataTable> GetAllPlayersAsync()
         {
-            DataTable? dt = null;
+            DataTable dt = new DataTable();
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("SP_GetAllPlayers", conn))
@@ -158,7 +189,6 @@ namespace BilliardsDataAccessLayer
                         {
                             if (reader.HasRows )
                             {
-                                dt = new DataTable();
                                 dt.Load(reader);
                             }
                         }
@@ -238,35 +268,90 @@ namespace BilliardsDataAccessLayer
             }
             return found;
         }
-        public static async Task<DataTable?> GetPlayerPaymentsAsync(int PlayerID)
+        public static async Task<PlayerStatisticsDTO?> GetPlayerStatisticsAsync(int PlayerID)
         {
-            DataTable? dt = null;
+            PlayerStatisticsDTO? playerStatistics=null;
             using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SP_GetPlayerPayments", conn))
+                using (SqlCommand cmd = new SqlCommand("SP_GetPlayerStatistics", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PlayerID", PlayerID);
                     try
                     {
                         await conn.OpenAsync();
-                        using(SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            if (reader.HasRows) 
+                            if (await reader.ReadAsync())
                             {
-                                dt = new DataTable();
+                                playerStatistics = new PlayerStatisticsDTO();
+                                playerStatistics.TotalHoursPlayed = Convert.ToDouble(reader["TotalHoursPlayed"]);
+                                playerStatistics.TotalMoneyPaid = Convert.ToDecimal(reader["TotalMoneyPaid"]);
+                                playerStatistics.MostPlayedTable = reader["MostPlayedTable"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["MostPlayedTable"]);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string Location = "clsPlayersData → GetPlayerStatisticsAsync";
+                        clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
+                    }
+                }
+            }
+            return playerStatistics;
+        }
+
+        public static async Task<DataTable> GetInactivePlayersAsync()
+        {
+            DataTable dt  = new DataTable();
+            ;
+            using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_GetInactivePlayers", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    try
+                    {
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (reader.HasRows)
+                            {
                                 dt.Load(reader);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        string Location = "clsPlayersData → GetPlayerPaymentsAsync";
+                        string Location = "clsPlayersData → GetInactivePlayers";
                         clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
                     }
                 }
             }
             return dt;
+        }
+        public static async Task<bool> RestorePlayerAsync(int PlayerID)
+        {
+            int rowsAffected = 0;
+            using(SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_RestorePlayer", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@PlayerID", PlayerID);
+                    try
+                    {
+                        await conn.OpenAsync();
+                        rowsAffected = await cmd.ExecuteNonQueryAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        string Location = "clsPlayersData → SP_RestorePlayer";
+                        clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
+                    }
+                }
+            }
+            return rowsAffected > 0;
         }
     }
 }
