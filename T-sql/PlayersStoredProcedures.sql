@@ -195,6 +195,7 @@ BEGIN
      P.IsActive = 0;
 END;
 
+
 GO
 CREATE TRIGGER  TR_Players_SoftDelete
 ON Players
