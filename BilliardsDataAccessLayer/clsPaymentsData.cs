@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using BilliardsDataAccessLayer.DTOs;
+using Microsoft.Data.SqlClient;
 using SharedUtils;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,20 @@ namespace BilliardsDataAccessLayer
 {
     public class clsPaymentsData
     {
+        static PaymentDTO _FillPaymentData(SqlDataReader reader)
+        {
+            return new PaymentDTO
+            {
+                PaymentID = Convert.ToInt32(reader["PaymentID"]),
+                PlayerID =Convert.ToInt32(reader["PlayerID"]),
+                TableID = Convert.ToInt32(reader["TableID"]),
+                StartTime = Convert.ToDateTime(reader["StartTime"]),
+                EndTime = reader["EndTime"] == DBNull.Value ? null : Convert.ToDateTime(reader["EndTime"]),
+                DateOfPayment = reader["DateOfPayment"] == DBNull.Value ? null : Convert.ToDateTime(reader["DateOfPayment"]),
+                CreatedByUserID =Convert.ToInt32(reader["CreatedByUserID"]),
+                Fees = reader["Fees"] == DBNull.Value ? null : Convert.ToDecimal(reader["Fees"])
+            };
+        }
         public static async Task<DataTable?> GetPlayerPaymentsAsync(int PlayerID)
         {
             DataTable? dt = null;
@@ -38,6 +53,35 @@ namespace BilliardsDataAccessLayer
                 }
             }
             return dt;
+        }
+        public static async Task<PaymentDTO> GetPaymentByPaymentIDAsync(int PaymentID)
+        {
+            PaymentDTO? result = null;
+            using (SqlConnection conn = new SqlConnection(clsDataAccessSettings.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SP_GetPaymentByPaymentID", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@PaymentID", PaymentID);
+                    try
+                    {
+                        await conn.OpenAsync();
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                result = _FillPaymentData(reader);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string Location = "clsPaymentsData → GetPaymentByPaymentIDAsync";
+                        clsEventLogger.LogEvent(ex, Location, System.Diagnostics.EventLogEntryType.Error);
+                    }
+                }
+            }
+            return result;
         }
     }
 }
