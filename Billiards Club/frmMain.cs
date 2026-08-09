@@ -1,12 +1,8 @@
 ﻿using Billiards_Club.People;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-
+using Billiards_Club.PoolTables;
 namespace Billiards_Club
 {
     using Billiards_Club.Classes;
@@ -79,7 +75,18 @@ namespace Billiards_Club
 
         private void inactivePlayersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using(frmInactivePlayers frm = new frmInactivePlayers())
+            using (frmInactivePlayers frm = new frmInactivePlayers())
+                frm.ShowDialog();
+        }
+
+        private void managePoolTablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void poolTablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (frmPoolTables frm = new PoolTables.frmPoolTables())
                 frm.ShowDialog();
         }
     }

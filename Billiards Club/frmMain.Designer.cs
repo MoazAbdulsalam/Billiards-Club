@@ -37,6 +37,8 @@
             inactivePlayersToolStripMenuItem = new ToolStripMenuItem();
             managePlayersToolStripMenuItem = new ToolStripMenuItem();
             tablesToolStripMenuItem = new ToolStripMenuItem();
+            managePoolTablesToolStripMenuItem = new ToolStripMenuItem();
+            poolTablesToolStripMenuItem = new ToolStripMenuItem();
             accountSettingsToolStripMenuItem = new ToolStripMenuItem();
             SignOutToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
@@ -120,9 +122,29 @@
             // 
             // tablesToolStripMenuItem
             // 
+            tablesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { managePoolTablesToolStripMenuItem, poolTablesToolStripMenuItem });
+            tablesToolStripMenuItem.Image = Properties.Resources._8_ball;
             tablesToolStripMenuItem.Name = "tablesToolStripMenuItem";
-            tablesToolStripMenuItem.Size = new Size(146, 68);
+            tablesToolStripMenuItem.Size = new Size(166, 68);
             tablesToolStripMenuItem.Text = "Tables";
+            // 
+            // managePoolTablesToolStripMenuItem
+            // 
+            managePoolTablesToolStripMenuItem.Font = new Font("Segoe UI", 20F);
+            managePoolTablesToolStripMenuItem.Image = Properties.Resources.account_settings_64;
+            managePoolTablesToolStripMenuItem.Name = "managePoolTablesToolStripMenuItem";
+            managePoolTablesToolStripMenuItem.Size = new Size(414, 50);
+            managePoolTablesToolStripMenuItem.Text = "Manage Pool Tables";
+            managePoolTablesToolStripMenuItem.Click += managePoolTablesToolStripMenuItem_Click;
+            // 
+            // poolTablesToolStripMenuItem
+            // 
+            poolTablesToolStripMenuItem.Font = new Font("Segoe UI", 20F);
+            poolTablesToolStripMenuItem.Image = Properties.Resources.pool_table1;
+            poolTablesToolStripMenuItem.Name = "poolTablesToolStripMenuItem";
+            poolTablesToolStripMenuItem.Size = new Size(414, 50);
+            poolTablesToolStripMenuItem.Text = "Pool Tables";
+            poolTablesToolStripMenuItem.Click += poolTablesToolStripMenuItem_Click;
             // 
             // accountSettingsToolStripMenuItem
             // 
@@ -210,5 +232,7 @@
         private ToolStripMenuItem currentUserInfoToolStripMenuItem;
         private ToolStripMenuItem inactivePlayersToolStripMenuItem;
         private ToolStripMenuItem managePlayersToolStripMenuItem;
+        private ToolStripMenuItem managePoolTablesToolStripMenuItem;
+        private ToolStripMenuItem poolTablesToolStripMenuItem;
     }
 }
